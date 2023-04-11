@@ -1,0 +1,78 @@
+<ng-container *ngIf="heroes">
+	<mat-card>
+		<mat-card-header>
+			<mat-card-title>My Heroes</mat-card-title>
+		</mat-card-header>
+		<mat-table mat-card-content [dataSource]="heroesDataSource">
+			<ng-container matColumnDef="id">
+				<mat-header-cell *matHeaderCellDef>ID</mat-header-cell>
+				<mat-cell *matCellDef="let hero">{{ hero.id }}</mat-cell>
+			</ng-container>
+
+			<ng-container matColumnDef="name">
+				<mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+				<mat-cell *matCellDef="let hero">{{ hero.name }}</mat-cell>
+			</ng-container>
+
+			<ng-container matColumnDef="power">
+				<mat-header-cell *matHeaderCellDef>Power</mat-header-cell>
+				<mat-cell *matCellDef="let hero">{{ hero.power }}</mat-cell>
+			</ng-container>
+
+			<ng-container matColumnDef="actions">
+				<mat-header-cell *matHeaderCellDef></mat-header-cell>
+				<mat-cell *matCellDef="let hero">
+					<div class="button-container">
+						<a mat-mini-fab routerLink="/view/{{ hero.id }}" color="accent">
+							<mat-icon>summarize</mat-icon>
+						</a>
+					</div>
+					<div class="button-container">
+						<a mat-mini-fab routerLink="/edit/{{ hero.id }}" color="primary">
+							<mat-icon>edit</mat-icon>
+						</a>
+					</div>
+					<div class="button-container">
+						<button type="button" mat-mini-fab color="warn" (click)="confirmDeletion(hero)">
+							<mat-icon>delete</mat-icon>
+						</button>
+					</div>
+				</mat-cell>
+			</ng-container>
+
+			<mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+			<mat-row *matRowDef="let row; columns: columns;"></mat-row>
+		</mat-table>
+	</mat-card>
+</ng-container>
+<ng-container *ngIf="hero">
+	<mat-card class="card-container-25">
+		<mat-card-header>
+			<mat-card-title>{{ hero.name }}</mat-card-title>
+			<mat-card-subtitle>
+				ID: {{ hero.id }}<br />
+				Power: {{ hero.power }}
+			</mat-card-subtitle>
+		</mat-card-header>
+		<mat-card-actions>
+			<div class="button-container">
+				<a mat-fab extended color="accent" class="inline-button" (click)="back()">
+					<mat-icon>arrow_back</mat-icon>
+					Back
+				</a>
+			</div>
+			<div class="button-container">
+				<a mat-fab extended color="primary" class="inline-button" routerLink="/edit/{{ hero.id }}">
+					<mat-icon>edit</mat-icon>
+					Edit
+				</a>
+			</div>
+			<div class="button-container">
+				<button type="button" mat-fab extended color="warn" class="inline-button" (click)="confirmDeletion(hero)">
+					<mat-icon>delete</mat-icon>
+					Delete
+				</button>
+			</div>
+		</mat-card-actions>
+	</mat-card>
+</ng-container>

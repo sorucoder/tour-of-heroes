@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>Are you sure you want to delete {{ hero.name }}?</h2>
+<mat-dialog-actions>
+	<button type="button" mat-fab extended color="warn" [mat-dialog-close]="true">
+		<mat-icon>done</mat-icon>
+		Yes
+	</button>
+	<button type="button" mat-fab extended color="primary" [mat-dialog-close]="false">
+		<mat-icon>close</mat-icon>
+		No
+	</button>
+</mat-dialog-actions>

@@ -1,0 +1,8 @@
+#appContainer {
+	min-height: 100%;
+}
+
+#appContent {
+	display: flex;
+	padding: 20px;
+}

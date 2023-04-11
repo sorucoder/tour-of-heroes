@@ -1,0 +1,40 @@
+<mat-card class="card-container-50">
+	<mat-card-header>
+		<h1>Create a Hero</h1>
+	</mat-card-header>
+	<ng-container *ngIf="form">
+		<mat-card-content>
+			<form id="createForm" [formGroup]="form" (ngSubmit)="submit()">
+				<mat-form-field class="form-field" appearance="fill">
+					<mat-label>Name</mat-label>
+					<input matInput type="text" required formControlName="name" />
+					<mat-error *ngIf="nameControl.invalid">{{ getNameFeedback() }}</mat-error>
+				</mat-form-field>
+				<mat-form-field class="form-field" appearance="fill">
+					<mat-label>Power</mat-label>
+					<input matInput type="text" required formControlName="power" [matAutocomplete]="powersAutocomplete" />
+					<mat-autocomplete #powersAutocomplete>
+						<mat-option *ngFor="let power of powerAutocompletes | async" [value]="power">
+							{{ power }}
+						</mat-option>
+					</mat-autocomplete>
+					<mat-error *ngIf="powerControl.invalid">{{ getPowerFeedback() }}</mat-error>
+				</mat-form-field>
+			</form>
+		</mat-card-content>
+		<mat-card-actions>
+			<div class="button-container">
+				<button mat-fab extended type="submit" form="createForm" color="primary" [disabled]="form.invalid">
+					<mat-icon>done</mat-icon>
+					Save
+				</button>
+			</div>
+			<div class="button-container">
+				<button mat-fab extended type="button" color="warn" [disabled]="form.invalid" (click)="back()">
+					<mat-icon>close</mat-icon>
+					Cancel
+				</button>
+			</div>
+		</mat-card-actions>
+	</ng-container>
+</mat-card>
